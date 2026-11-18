@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Navideño Reciclado 60 cm | I.E. San José de Tarbes</title>
+  <style>
+    :root {
+      --red: #b91c1c;
+      --red-dark: #7f1d1d;
+      --green: #15803d;
+      --bg: #fefaf6;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    header {
+      background: linear-gradient(135deg, var(--red-dark), var(--red));
+      color: white;
+      padding: 1.75rem 1.25rem 2rem;
+      text-align: center;
+      border-bottom: 5px solid var(--green);
+    }
+    .school-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.95);
+      color: #111827;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .school-bar img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+    .school-bar span {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.65rem;
+    }
+    header h1 { font-size: 1.7rem; line-height: 1.2; margin-bottom: 0.5rem; }
+    header p { font-size: 0.95rem; opacity: 0.92; max-width: 640px; margin: 0 auto; }
+
+    main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    h2 {
+      font-size: 1.15rem;
+      color: var(--red);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 2px solid #fee2e2;
+      padding-bottom: 0.4rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.9rem;
+    }
+    .stat-box {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: 10px;
+      padding: 0.85rem;
+    }
+    .stat-box strong { display: block; color: var(--green); font-size: 0.82rem; text-transform: uppercase; }
+    .stat-box span { font-size: 1.02rem; font-weight: 700; }
+
+    .compare-card {
+      border-radius: 10px;
+      padding: 0.9rem;
+      border: 1px solid var(--border);
+    }
+    .compare-card.reciclar { background: #fef2f2; border-color: #fecaca; }
+    .compare-card.reutilizar { background: #f0fdf4; border-color: #bbf7d0; }
+    .compare-card h3 { font-size: 1rem; margin-bottom: 0.35rem; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.6rem;
+      text-align: left;
+    }
+    th { background: #1f2937; color: white; font-weight: 600; }
+    tr:nth-child(even) td { background: #f9fafb; }
+    .table-wrap { overflow-x: auto; }
+
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 2.5rem;
+      margin-bottom: 0.9rem;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .media-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8fafc;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+    .media-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .media-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+    }
+    .media-caption {
+      padding: 0.65rem 0.8rem;
+      font-size: 0.84rem;
+    }
+    .media-caption strong {
+      display: block;
+      color: #111827;
+      margin-bottom: 0.15rem;
+    }
+    .media-caption span {
+      color: var(--muted);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 88vh;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1rem;
+      right: 1.25rem;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="school-bar">
+      <img src="logo.png" alt="Logo I.E. San José de Tarbes" />
+      <span>I.E. SAN JOSÉ DE TARBES • CASTILLA, PIURA</span>
+    </div>
+    <br />
+    <div class="badge">EDUCACIÓN PARA EL TRABAJO (EPT) • PRESENTACIÓN VISUAL INDUSTRIAL</div>
+    <h1>Robot Navideño Reciclado (60 cm) + Mini Robot Compañero</h1>
+    <p>Documentación digital del proyecto: indicaciones, medidas exactas en centímetros, método de pegado, tiempos y galería fotográfica del procedimiento.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Indicaciones del Producto y Ficha Técnica</h2>
+      <div class="grid-2">
+        <div class="stat-box">
+          <strong>Altura Total Exigida</strong>
+          <span>60.0 cm exactos</span>
+        </div>
+        <div class="stat-box">
+          <strong>Estilo / Acabado</strong>
+          <span>Presentación Visual Industrial</span>
+        </div>
+        <div class="stat-box">
+          <strong>Cartilla</strong>
+          <span>Mensaje: "¡Feliz Navidad!"</span>
+        </div>
+        <div class="stat-box">
+          <strong>Innovación (Dúo)</strong>
+          <span>Robot 60 cm + Mini Robot con Lata (~26 cm)</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Enfoque EPT: Reciclar vs. Reutilizar</h2>
+      <div class="grid-2">
+        <div class="compare-card reciclar">
+          <h3>♻️ Reciclar</h3>
+          <p>Transformar o desarmar un material para crear piezas nuevas con otra forma y función. <strong>En el proyecto:</strong> cortamos planchas de cartón para fabricar cajas estructurales y enrollamos tiras en cilindros lisos para los brazos y las piernas.</p>
+        </div>
+        <div class="compare-card reutilizar">
+          <h3>🔄 Reutilizar</h3>
+          <p>Usar un producto ya existente (o parte de él) para darle una nueva vida útil sin destruirlo. <strong>En el proyecto:</strong> reutilizamos la lata pintada con rayas navideñas como cuerpo del Mini Robot y tapas plásticas como pies y orejas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Medidas Exactas (cm), Pegado y Tiempos</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Pieza / Parte</th>
+              <th>Medidas Exactas (cm)</th>
+              <th>Cómo se pega</th>
+              <th>Tiempo estimado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Base compartida (x2)</td>
+              <td>44.0 × 24.0 cm</td>
+              <td>Silicona caliente entre ambas planchas + peso</td>
+              <td>10 min (seca en 2 min)</td>
+            </tr>
+            <tr>
+              <td>Pies Robot Grande (2 tapas)</td>
+              <td>Ø 9.0 × 4.0 cm alto</td>
+              <td>Silicona caliente directo a la base</td>
+              <td>5 min</td>
+            </tr>
+            <tr>
+              <td>Piernas: Tubos lisos (x2)</td>
+              <td>Ø 6.5 cm (enrollado)</td>
+              <td>Cilindro de cartón fijado con silicona caliente</td>
+              <td>15 min</td>
+            </tr>
+            <tr>
+              <td>Torso (Caja pintada de rojo)</td>
+              <td>20.0 × 20.0 × 16.0 cm</td>
+              <td>Pestañas internas dobladas 90° + silicona caliente</td>
+              <td>25 min</td>
+            </tr>
+            <tr>
+              <td>Cabeza (Caja pintada de marrón)</td>
+              <td>17.0 × 19.0 × 15.0 cm</td>
+              <td>Pestañas internas + tubo de cuello (Ø 8 cm)</td>
+              <td>25 min</td>
+            </tr>
+            <tr>
+              <td>Brazos: Tubos lisos (x2)</td>
+              <td>15.0 cm largo (Ø 6.0 cm)</td>
+              <td>Silicona caliente al costado del torso</td>
+              <td>15 min</td>
+            </tr>
+            <tr>
+              <td>Gorro Navideño</td>
+              <td>35.0 cm base × 24.0 cm alto</td>
+              <td>Silicona caliente/fría en bordes + algodón</td>
+              <td>15 min</td>
+            </tr>
+            <tr>
+              <td>Mini Robot (Lata + Cabeza)</td>
+              <td>~26.0 cm alto total (Lata 10.5 cm)</td>
+              <td>Silicona caliente sobre la base derecha</td>
+              <td>25 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Procedimiento de Construcción</h2>
+      <ol class="steps">
+        <li><strong>Trazo y corte:</strong> Marcar todas las piezas rectangulares con regla metálica sobre cartón reciclado y recortar las plantillas 1:1.</li>
+        <li><strong>Armado de cajas:</strong> Formar el torso (20×20×16 cm) y la cabeza (17×19×15 cm) doblando las pestañas hacia adentro para lograr un acabado industrial limpio.</li>
+        <li><strong>Cilindros de piernas y brazos:</strong> Enrollar tubos lisos de cartón firme para las piernas y los brazos, fijando las uniones con silicona caliente.</li>
+        <li><strong>Ensamblaje vertical (60 cm):</strong> Pegar tapas-pies a la base, montar piernas, torso rojo, cuello con tubo interno, cabeza marrón y gorro navideño.</li>
+        <li><strong>Decoración y Cartilla:</strong> Pegar ojos, boca, árbol de foamy verde brillante en el pecho, manoplas y el mensaje <em>"¡Feliz Navidad!"</em>.</li>
+        <li><strong>Mini Robot Compañero:</strong> Integrar la lata pintada con su lazo verde al costado con sus tapitas, cabeza marrón y gorrito navideño.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5. Galería Fotográfica del Procedimiento y Resultado</h2>
+      <p style="margin-bottom: 0.9rem; color: var(--muted); font-size: 0.9rem;">
+        Toca cualquier fotografía para verla en tamaño completo.
+      </p>
+      <div class="media-grid">
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 21.27.12.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 21.27.12.jpeg" alt="Lata pintada y materiales iniciales" />
+          <div class="media-caption">
+            <strong>1. Lata reutilizada y materiales</strong>
+            <span>Lata pintada con rayas navideñas, lazo verde, tijeras y silicona.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 21.27.11.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 21.27.11.jpeg" alt="Moldes 1:1 sobre cartón" />
+          <div class="media-caption">
+            <strong>2. Trazado con plantillas 1:1</strong>
+            <span>Uso de los moldes impresos para marcar las piezas exactas.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 21.27.13.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 21.27.13.jpeg" alt="Recorte de la cabeza del Mini Robot" />
+          <div class="media-caption">
+            <strong>3. Corte de piezas desplegables</strong>
+            <span>Recorte de la cruz para la cabeza del Mini Robot.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 21.27.15.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 21.27.15.jpeg" alt="Pegado con silicona caliente" />
+          <div class="media-caption">
+            <strong>4. Unión con silicona caliente</strong>
+            <span>Pegado de las caras del torso y cabeza.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 21.27.14.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 21.27.14.jpeg" alt="Armado de caja estructural" />
+          <div class="media-caption">
+            <strong>5. Armado de la caja estructural</strong>
+            <span>Doblez de pestañas internas para acabado limpio.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 23.46.16.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 23.46.16.jpeg" alt="Estructura pintada y ensamblada" />
+          <div class="media-caption">
+            <strong>6. Ensamblaje vertical (60 cm)</strong>
+            <span>Cabeza marrón, cuello, torso rojo y tubos de piernas.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 23.46.56.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 23.46.56.jpeg" alt="Detalles del gorro y Mini Robot" />
+          <div class="media-caption">
+            <strong>7. Acabado y detalles navideños</strong>
+            <span>Pegado del gorro navideño y armado del Mini Robot.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-17 at 23.57.27.jpeg')">
+          <img src="WhatsApp Image 2026-11-17 at 23.57.27.jpeg" alt="Mini Robot terminado" />
+          <div class="media-caption">
+            <strong>8. Mini Robot de Lata terminado</strong>
+            <span>Cuerpo con la lata rayada, lazo verde, rostro y gorrito.</span>
+          </div>
+        </div>
+        <div class="media-card" onclick="openLightbox('WhatsApp Image 2026-11-18 at 00.00.51.jpeg')">
+          <img src="WhatsApp Image 2026-11-18 at 00.00.51.jpeg" alt="Robot Grande terminado" />
+          <div class="media-caption">
+            <strong>9. Robot Principal (60 cm)</strong>
+            <span>Torso rojo con árbol brillante, brazos lisos, rostro y gorro navideño.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <img id="lightbox-img" src="" alt="Vista ampliada" />
+  </div>
+
+  <footer>
+    I.E. San José de Tarbes (Castilla, Piura) • Proyecto EPT • 2026
+  </footer>
+
+  <script>
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
